@@ -33,7 +33,7 @@ data <- sf::st_read(tmp, quiet = TRUE)
 
 response <- list()
 
-for (i in nrow(data)) {
+for (i in seq_len(nrow(data))) {
 
   id <- data[[i, "id"]]
 
@@ -62,9 +62,13 @@ for (i in nrow(data)) {
 
   taxon <- data[[i, "species"]]
 
+  taxon <- gsub("Ã¤", "ä", taxon)
+
+  taxon <- switch(taxon, lupiini = "komealupiini", taxon)
+
   control <- data[[i, "torjunta"]]
 
-  # Add additional mapping if needed
+  # Add additional mapping when needed
   control <- switch(control, list())
 
   document <- list(
@@ -123,7 +127,28 @@ for (i in nrow(data)) {
   )
   post <- httr2::req_body_json(post, document, digits = 5L)
 
+  message(sprintf("INFO [%s] Submitting document: %s", format(Sys.time()), id))
+
   response_i <- httr2::req_perform(post)
+
+  if (response_i[["status_code"]] == 200L) {
+
+    message(
+      sprintf(
+        "INFO [%s] Document %s submission successful", format(Sys.time()), id
+      )
+    )
+
+  } else {
+
+    message(
+      sprintf(
+        "ERROR [%s] Document %s submission unsuccessful (code: %s)",
+        format(Sys.time()), id, response_i[["status_code"]]
+      )
+    )
+
+  }
 
   response_i <- unclass(response_i)
   response_i[["cache"]] <- NULL
@@ -132,10 +157,12 @@ for (i in nrow(data)) {
 
   response[[i]] <- response_i
 
+  Sys.sleep(.1)
+
 }
 
 response <- jsonlite::toJSON(response, auto_unbox = TRUE, pretty = TRUE)
 
 response <- gsub(Sys.getenv("FINBIF_ACCESS_TOKEN"), "", response)
 
-cat(response, "logs.json")
+cat(response, file = "logs.json")
