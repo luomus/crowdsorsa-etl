@@ -63,10 +63,19 @@ for (i in seq_len(nrow(data))) {
 
   taxon <- switch(taxon, lupiini = "komealupiini", taxon)
 
-  control <- data[[i, "torjunta"]]
+  control_date <- data[[i, "torjunta"]]
 
-  # Add additional mapping when needed
-  control <- switch(control, list())
+  if (is.na(control_date)) {
+
+    control <- list()
+
+  } else {
+
+    control <- "INVASIVE_PARTIAL"
+
+  }
+
+  control_notes <- paste0("Controlled: ", control_date)
 
   document <- list(
     schema = jsonlite::unbox("laji-etl"),
@@ -82,6 +91,8 @@ for (i in seq_len(nrow(data))) {
   document[[c("publicDocument", "keywords")]] <- c(
     id, sprintf("crowdsorsa-%s", municipality)
   )
+
+  document[[c("publicDocument", "notes")]] <- jsonlite::unbox(control_notes)
 
   document[[c("publicDocument", "gatherings")]] <- list()
 
