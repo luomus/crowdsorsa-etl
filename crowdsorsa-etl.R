@@ -51,10 +51,7 @@ for (i in seq_len(nrow(data))) {
 
   geo <- data[i, "geometry"]
 
-  crs <- sf::st_crs(geo)[["input"]]
-
-  # Add additional mappings if needed
-  crs <- switch(crs, "WGS 84" = "WGS84", "WGS84")
+  crs <- "WGS84"
 
   geo <- jsonlite::fromJSON(geojsonsf::sf_geojson(geo))
 
