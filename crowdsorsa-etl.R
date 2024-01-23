@@ -57,7 +57,9 @@ for (i in seq_len(nrow(data))) {
 
   geo[["type"]] <- jsonlite::unbox(geo[["type"]])
 
-  taxon <- data[[i, "species"]]
+  taxon <- data[[i, "laji"]]
+
+  taxon <- iconv(taxon, "latin1", "UTF-8")
 
   taxon <- gsub("Ã¤", "ä", taxon)
 
