@@ -61,6 +61,8 @@ for (i in seq_len(nrow(data))) {
 
   taxon <- iconv(taxon, "latin1", "UTF-8")
 
+  taxon <- gsub("Ã¶", "ö", taxon)
+
   taxon <- gsub("Ã¤", "ä", taxon)
 
   taxon <- switch(taxon, lupiini = "komealupiini", taxon)
