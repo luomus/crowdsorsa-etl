@@ -65,8 +65,6 @@ for (i in seq_len(nrow(data))) {
 
   taxon <- gsub("Ã¤", "ä", taxon)
 
-  taxon <- switch(taxon, lupiini = "komealupiini", taxon)
-
   control_date <- data[[i, "torjunta"]]
 
   if (is.na(control_date)) {
