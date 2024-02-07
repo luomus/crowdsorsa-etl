@@ -65,6 +65,16 @@ for (i in seq_len(nrow(data))) {
 
   taxon <- gsub("Ã¤", "ä", taxon)
 
+  taxon_id <- switch(
+    taxon,
+    jättipalsami = "http://tun.fi/MX.39158",
+    lupiini = "http://tun.fi/MX.38947",
+    kurtturuusu = "http://tun.fi/MX.38815",
+    jättiputki = "http://tun.fi/MX.41695",
+    japanintatar = "http://tun.fi/MX.38240",
+    karhunköynnös = "http://tun.fi/MX.5001859"
+  )
+
   control_date <- data[[i, "torjunta"]]
 
   if (is.na(control_date)) {
@@ -123,6 +133,7 @@ for (i in seq_len(nrow(data))) {
           sprintf("http://tun.fi/%s/%s_U", collection_id, id)
         ),
         taxonVerbatim = jsonlite::unbox(taxon),
+        reportedTaxonId = jsonlite::unbox(taxon_id),
         sourceTags = control
       )
     )
