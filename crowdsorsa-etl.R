@@ -84,7 +84,7 @@ for (i in seq_len(nrow(data))) {
 
   } else {
 
-    control <- "INVASIVE_PARTIAL"
+    control <- list("INVASIVE_PARTIAL")
 
   }
 
