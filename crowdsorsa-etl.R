@@ -38,6 +38,7 @@ for (i in seq_len(nrow(data))) {
   id <- data[[i, "id"]]
 
   municipality <- data[[i, "kuntakoodi"]]
+  municipality <- switch(municipality, "864" = "20", municipality)
   municipality <- which(municipality_key_2023[["kunta"]] == municipality)
   municipality <- municipality_key_2023[[municipality, "municipality_name_fi"]]
 
