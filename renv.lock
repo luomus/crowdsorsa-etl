@@ -202,9 +202,9 @@
     },
     "geofi": {
       "Package": "geofi",
-      "Version": "1.0.11",
+      "Version": "1.0.14",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "curl",
@@ -218,7 +218,7 @@
         "xml2",
         "yaml"
       ],
-      "Hash": "0d5a2a33ea1591eec79e613e94ca99f3"
+      "Hash": "32df8671be54e531cf0961e778617646"
     },
     "geojsonsf": {
       "Package": "geojsonsf",
