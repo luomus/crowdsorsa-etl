@@ -147,7 +147,7 @@ for (i in seq_len(nrow(data))) {
   post <- httr2::req_url_query(
     post, access_token = Sys.getenv("FINBIF_ACCESS_TOKEN")
   )
-  post <- httr2::req_body_json(post, document, digits = 5L)
+  post <- httr2::req_body_json(post, document)
 
   message(sprintf("INFO [%s] Submitting document: %s", format(Sys.time()), id))
 
