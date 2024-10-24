@@ -27,7 +27,7 @@ if (Sys.getenv("BRANCH") != "main") {
 
 tmp <- tempfile()
 
-zip <- utils::unzip("data.zip", exdir = tmp)
+zip <- utils::unzip("data2023.zip", exdir = tmp)
 
 data <- sf::st_read(tmp, quiet = TRUE)
 
