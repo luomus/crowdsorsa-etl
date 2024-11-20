@@ -1,3 +1,5 @@
+# Note: in 2025 will need to add location identifiers
+
 suppressPackageStartupMessages({
 
   library(geofi, warn.conflicts = FALSE, quietly = TRUE)
