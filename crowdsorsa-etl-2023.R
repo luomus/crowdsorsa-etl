@@ -191,4 +191,4 @@ response <- jsonlite::toJSON(response, auto_unbox = TRUE, pretty = TRUE)
 
 response <- gsub(Sys.getenv("FINBIF_ACCESS_TOKEN"), "", response)
 
-cat(response, file = "logs.json")
+cat(response, file = "logs2023.json")
