@@ -31,6 +31,10 @@ zip <- utils::unzip("data2023.zip", exdir = tmp)
 
 data <- sf::st_read(tmp, quiet = TRUE)
 
+data$geometry <- sf::st_cast(sf::st_make_valid(data$geometry), "MULTIPOLYGON")
+
+data$pinta.ala <- ceiling(as.numeric(sf::st_area(data$geometry)))
+
 response <- list()
 
 for (i in seq_len(nrow(data))) {
@@ -113,6 +117,23 @@ for (i in seq_len(nrow(data))) {
 
   document[[c("publicDocument", "gatherings")]] <- list()
 
+  if (data[[i, "pinta.ala"]] > 0) {
+
+    area <- list(
+      list(
+        decimalValue = jsonlite::unbox(as.numeric(data[[i, "pinta.ala"]])),
+        fact = jsonlite::unbox("http://tun.fi/MY.areaInSquareMeters"),
+        integerValue = jsonlite::unbox(as.integer(data[[i, "pinta.ala"]])),
+        value = jsonlite::unbox(format(data[[i, "pinta.ala"]]))
+      )
+    )
+
+  } else {
+
+    area <- NULL
+
+  }
+
   document[[c("publicDocument", "gatherings")]][[1L]] <- list(
     gatheringId = jsonlite::unbox(
       sprintf("http://tun.fi/%s/%s_G", collection_id, id)
@@ -139,7 +160,8 @@ for (i in seq_len(nrow(data))) {
         ),
         taxonVerbatim = jsonlite::unbox(taxon),
         reportedTaxonId = jsonlite::unbox(taxon_id),
-        sourceTags = control
+        sourceTags = control,
+        facts = area
       )
     )
   )

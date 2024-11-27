@@ -35,6 +35,7 @@ data <- sf::st_read(tmp, quiet = TRUE)
 
 data$havaittu <- sub("2026", "2024", data$havaittu)
 data$torjuttu <- sub("2026", "2024", data$torjuttu)
+data$pinta.ala <- ceiling(as.numeric(sf::st_area(data$geometry)))
 
 response <- list()
 
