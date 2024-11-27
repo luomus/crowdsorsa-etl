@@ -95,7 +95,11 @@ for (i in seq_len(nrow(data))) {
     id, sprintf("crowdsorsa-%s", municipality)
   )
 
-  document[[c("publicDocument", "notes")]] <- jsonlite::unbox(control_notes)
+  if (!is.na(control_date)) {
+
+    document[[c("publicDocument", "notes")]] <- jsonlite::unbox(control_notes)
+
+  }
 
   document[[c("publicDocument", "gatherings")]] <- list()
 
