@@ -125,7 +125,19 @@ for (i in seq_len(nrow(data))) {
         ),
         taxonVerbatim = jsonlite::unbox(taxon),
         reportedTaxonId = jsonlite::unbox(taxon_id),
-        sourceTags = control
+        sourceTags = control,
+        abundanceString = jsonlite::unbox(
+          format(data[[i, "tiheys"]], nsmall = 1)
+        ),
+        abundanceUnit = jsonlite::unbox("RELATIVE_DENSITY"),
+        facts = list(
+          list(
+            decimalValue = jsonlite::unbox(as.numeric(data[[i, "pinta.ala"]])),
+            fact = jsonlite::unbox("http://tun.fi/MY.areaInSquareMeters"),
+            integerValue = jsonlite::unbox(as.integer(data[[i, "pinta.ala"]])),
+            value = jsonlite::unbox(format(data[[i, "pinta.ala"]]))
+          )
+        )
       )
     )
   )
