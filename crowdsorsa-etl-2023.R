@@ -31,11 +31,17 @@ zip <- utils::unzip("data2023.zip", exdir = tmp)
 
 data <- sf::st_read(tmp, quiet = TRUE)
 
-data$geometry <- sf::st_cast(sf::st_make_valid(data$geometry), "MULTIPOLYGON")
+data_valid_geom <- data
 
-data$pinta.ala <- ceiling(as.numeric(sf::st_area(data$geometry)))
+data_valid_geom$geometry <- sf::st_cast(
+  sf::st_make_valid(data$geometry), "MULTIPOLYGON"
+)
+
+data$pinta.ala <- ceiling(as.numeric(sf::st_area(data_valid_geom$geometry)))
 
 response <- list()
+
+gath <- c("publicDocument", "gatherings")
 
 for (i in seq_len(nrow(data))) {
 
@@ -54,7 +60,24 @@ for (i in seq_len(nrow(data))) {
 
   minute <- as.integer(format(time, "%M"))
 
-  geo <- data[i, "geometry"]
+  if (data[[i, "pinta.ala"]] > 0) {
+
+    area <- list(
+      list(
+        decimalValue = jsonlite::unbox(as.numeric(data[[i, "pinta.ala"]])),
+        fact = jsonlite::unbox("http://tun.fi/MY.areaInSquareMeters"),
+        integerValue = jsonlite::unbox(as.integer(data[[i, "pinta.ala"]])),
+        value = jsonlite::unbox(format(data[[i, "pinta.ala"]]))
+      )
+    )
+
+    geo <- data_valid_geom[i, "geometry"]
+
+  } else {
+
+    geo <- data[i, "geometry"]
+
+  }
 
   crs <- "WGS84"
 
@@ -115,26 +138,9 @@ for (i in seq_len(nrow(data))) {
 
   }
 
-  document[[c("publicDocument", "gatherings")]] <- list()
+  document[[gath]] <- list()
 
-  if (data[[i, "pinta.ala"]] > 0) {
-
-    area <- list(
-      list(
-        decimalValue = jsonlite::unbox(as.numeric(data[[i, "pinta.ala"]])),
-        fact = jsonlite::unbox("http://tun.fi/MY.areaInSquareMeters"),
-        integerValue = jsonlite::unbox(as.integer(data[[i, "pinta.ala"]])),
-        value = jsonlite::unbox(format(data[[i, "pinta.ala"]]))
-      )
-    )
-
-  } else {
-
-    area <- NULL
-
-  }
-
-  document[[c("publicDocument", "gatherings")]][[1L]] <- list(
+  document[[gath]][[1L]] <- list(
     gatheringId = jsonlite::unbox(
       sprintf("http://tun.fi/%s/%s_G", collection_id, id)
     ),
@@ -165,6 +171,12 @@ for (i in seq_len(nrow(data))) {
       )
     )
   )
+
+  if (data[[i, "pinta.ala"]] < 1) {
+
+    document[[gath]][[1]][["units"]][[1]][["facts"]] <- NULL
+
+  }
 
   post <- httr2::request(url)
   post <- httr2::req_url_path_append(post, "v0")
