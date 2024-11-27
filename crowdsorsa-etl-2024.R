@@ -33,6 +33,9 @@ zip <- utils::unzip("data2024.zip", exdir = tmp)
 
 data <- sf::st_read(tmp, quiet = TRUE)
 
+data$havaittu <- sub("2026", "2024", data$havaittu)
+data$torjuttu <- sub("2026", "2024", data$torjuttu)
+
 response <- list()
 
 for (i in seq_len(nrow(data))) {
