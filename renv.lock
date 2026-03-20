@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.5.2",
+    "Version": "4.5.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -509,11 +509,11 @@
     },
     "geofi": {
       "Package": "geofi",
-      "Version": "1.1.0",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Access Finnish Geospatial Data",
-      "Date": "2025-04-28",
+      "Date": "2026-03-02",
       "Authors@R": "c( person(\"Markus\", \"Kainu\", , \"markus.kainu@kapsi.fi\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-1376-503X\")), person(\"Joona\", \"Lehtomaki\", , \"joona.lehtomaki@iki.fi\", role = \"aut\", comment = c(ORCID = \"0000-0002-7891-0843\")), person(\"Juuso\", \"Parkkinen\", role = \"ctb\", comment = c(ORCID = \"0000-0002-7818-5901\")), person(\"Jani\", \"Miettinen\", role = \"ctb\"), person(\"Pyry\", \"Kantanen\", role = \"ctb\"), person(\"Sampo\", \"Vesanen\", role = \"ctb\"), person(\"Leo\", \"Lahti\", , \"leo.lahti@iki.fi\", role = \"aut\", comment = c(ORCID = \"0000-0001-5537-637X\")) )",
       "Maintainer": "Markus Kainu <markus.kainu@kapsi.fi>",
       "Description": "Designed to simplify geospatial data access from the Statistics Finland Web Feature Service API <https://geo.stat.fi/geoserver/index.html>, the geofi package offers researchers and analysts a set of tools to obtain and harmonize administrative spatial data for a wide range of applications, from urban planning to environmental research. The package contains annually updated time series of municipality key datasets that can be used for data aggregation and language translations.",
@@ -556,11 +556,11 @@
       "VignetteBuilder": "knitr",
       "Encoding": "UTF-8",
       "LazyData": "true",
-      "RoxygenNote": "7.3.2",
+      "RoxygenNote": "7.3.3",
       "X-schema.org-isPartOf": "http://ropengov.org/",
       "X-schema.org-keywords": "ropengov",
       "NeedsCompilation": "no",
-      "Author": "Markus Kainu [aut, cre] (<https://orcid.org/0000-0003-1376-503X>), Joona Lehtomaki [aut] (<https://orcid.org/0000-0002-7891-0843>), Juuso Parkkinen [ctb] (<https://orcid.org/0000-0002-7818-5901>), Jani Miettinen [ctb], Pyry Kantanen [ctb], Sampo Vesanen [ctb], Leo Lahti [aut] (<https://orcid.org/0000-0001-5537-637X>)",
+      "Author": "Markus Kainu [aut, cre] (ORCID: <https://orcid.org/0000-0003-1376-503X>), Joona Lehtomaki [aut] (ORCID: <https://orcid.org/0000-0002-7891-0843>), Juuso Parkkinen [ctb] (ORCID: <https://orcid.org/0000-0002-7818-5901>), Jani Miettinen [ctb], Pyry Kantanen [ctb], Sampo Vesanen [ctb], Leo Lahti [aut] (ORCID: <https://orcid.org/0000-0001-5537-637X>)",
       "Repository": "CRAN"
     },
     "geojsonsf": {
@@ -1208,7 +1208,7 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.1.7",
+      "Version": "1.1.8",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Project Environments",
@@ -1252,11 +1252,11 @@
       "Encoding": "UTF-8",
       "RoxygenNote": "7.3.3",
       "VignetteBuilder": "knitr",
+      "NeedsCompilation": "yes",
       "Config/Needs/website": "tidyverse/tidytemplate",
       "Config/testthat/edition": "3",
       "Config/testthat/parallel": "true",
       "Config/testthat/start-first": "bioconductor,python,install,restore,snapshot,retrieve,remotes",
-      "NeedsCompilation": "no",
       "Author": "Kevin Ushey [aut, cre] (ORCID: <https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
       "Repository": "CRAN"
@@ -1596,7 +1596,7 @@
     },
     "units": {
       "Package": "units",
-      "Version": "1.0-0",
+      "Version": "1.0-1",
       "Source": "Repository",
       "Title": "Measurement Units for R Vectors",
       "Authors@R": "c(person(\"Edzer\", \"Pebesma\", role = c(\"aut\", \"cre\"), email = \"edzer.pebesma@uni-muenster.de\", comment = c(ORCID = \"0000-0001-8049-7069\")), person(\"Thomas\", \"Mailund\", role = \"aut\", email = \"mailund@birc.au.dk\"), person(\"Tomasz\", \"Kalinowski\", role = \"aut\"), person(\"James\", \"Hiebert\", role = \"ctb\"), person(\"Iñaki\", \"Ucar\", role = \"aut\", email = \"iucar@fedoraproject.org\", comment = c(ORCID = \"0000-0001-6403-5550\")), person(\"Thomas Lin\", \"Pedersen\", role = \"ctb\") )",
@@ -1607,7 +1607,7 @@
         "Rcpp"
       ],
       "LinkingTo": [
-        "Rcpp (>= 0.12.10)"
+        "Rcpp (>= 1.1.0)"
       ],
       "Suggests": [
         "NISTunits",
