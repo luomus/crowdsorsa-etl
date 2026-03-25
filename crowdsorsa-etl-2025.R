@@ -37,8 +37,6 @@ for (i in seq_len(nrow(data))) {
 
   id <- data[[i, "tunniste"]]
 
-  if (!id %in% y) next
-
   municipality <- data[[i, "kunta"]]
 
   date <- strptime(data[[i, "havaittu"]], "%F")
